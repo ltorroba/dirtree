@@ -1,0 +1,6 @@
+*.txt
+__pycache__/
+*.pyc
+
+dist/
+MANIFEST
