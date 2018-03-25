@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     python_requires='>3.0.0',
     name='dirtree',
-    version='0.3dev',
+    version='0.3.0.dev',
     packages=find_packages(),
     license='MIT',
     description='Generates representations of directory trees.',
