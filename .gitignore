@@ -5,3 +5,4 @@ __pycache__/
 dist/
 MANIFEST
 dirtree.egg-info/
+build/
