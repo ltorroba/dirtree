@@ -6,3 +6,8 @@ dist/
 MANIFEST
 dirtree.egg-info/
 build/
+
+*.out
+*.log
+*.aux
+.DS_Store

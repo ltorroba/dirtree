@@ -1,0 +1,93 @@
+\documentclass{article}
+
+\usepackage[edges]{forest}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE FOREST STYLE FOR A DIRECTORY STRUCTURE WAS WRITTEN BY SALIM BOU %
+% SEE https://tex.stackexchange.com/a/328890 FOR MORE DETAILS         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Setup for directory trees
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+
+\def\Size{4pt}
+\tikzset{
+      folder/.pic={
+        \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+          (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);  
+        \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+          (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+      }
+    }
+    
+\forestset{%
+	pic dir tree/.style={%
+      for tree={%
+        font=\ttfamily,
+        grow'=0,
+        child anchor=west,
+        parent anchor=south,
+        anchor=west,
+        calign=first,
+        inner xsep=7pt,
+        edge path={
+          \noexpand\path [draw, \forestoption{edge}]
+          (!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+        },
+        % style for your file node 
+        file/.style={edge path={\noexpand\path [draw, \forestoption{edge}]
+          (!u.south west) +(7.5pt,0) |- (.child anchor) \forestoption{edge label};},
+          inner xsep=2pt,font=\small\ttfamily
+                     },
+        before typesetting nodes={
+          if n=1
+            {insert before={[,phantom]}}
+            {}
+        },
+        fit=band,
+        before computing xy={l=15pt},
+      }
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Dirtree example output}
+\author{Lucas F T Hennigen}
+\date{\today}
+
+\begin{document}
+
+\begin{figure}[!htb]
+\centering
+\begin{forest}
+pic dir tree,
+[{dirtree}
+[{.gitignore},file]
+[{README.md},file]
+[{dirtree}
+[{\char`_\char`_init\char`_\char`_.py},file]
+[{\char`_\char`_init\char`_\char`_.pyc},file]
+[{\char`_\char`_main\char`_\char`_.py},file]
+[{\char`_\char`_main\char`_\char`_.pyc},file]
+[{builder.py},file]
+[{builder.pyc},file]
+][{dirtree.egg-info}
+[{PKG-INFO},file]
+[{SOURCES.txt},file]
+[{dependency\char`_links.txt},file]
+[{entry\char`_points.txt},file]
+[{top\char`_level.txt},file]
+][{example}
+[{example.tex},file]
+][{setup.cfg},file]
+[{setup.py},file]
+]
+\end{forest}
+\caption{Sample tree generated when running {\tt dirtree . --ignore ".git" --root dirtree}. Note that
+the formatting was written by \href{https://tex.stackexchange.com/a/328890}{Salim Bou}.
+}
+\end{figure}
+
+\end{document}
