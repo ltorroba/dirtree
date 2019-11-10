@@ -4,7 +4,7 @@ import argparse
 
 def main():
     # Start parsing
-    parser = argparse.ArgumentParser(prog='tree-gen', description='Generates \
+    parser = argparse.ArgumentParser(prog='dirtree', description='Generates \
                                      a forest tree for a directory.')
     parser.add_argument('dir')
     parser.add_argument('--output', '-o',
